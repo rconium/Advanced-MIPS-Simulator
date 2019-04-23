@@ -3,7 +3,7 @@ mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; #memory 
 
 last_Instruction_stored = 0 #Detect for last instruction written into (2 NOPS)
 second_last_stored = 0 #Moves last instruction written here for 1 NOP
-pipeCycle = 4  #instruction should finish at "5th cycle"
+pipeCycle = 4  #instruction should finish at "5th cycle" 
 branchNOP = 0
 branchStall = 0
 cycle = 0
