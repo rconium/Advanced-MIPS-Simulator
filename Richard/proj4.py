@@ -5,6 +5,8 @@ cycle = 0
 threecycle = 0
 fourcycle = 0
 fivecycle = 0
+chSUM = 0
+dhSUM = 0
 pc = -1
 end = 0
 n = 0
@@ -70,15 +72,30 @@ def main():
     #    memory_initial = memory_initial + 4
     #    print("M[" + str(hex(memory_initial)) + "]" + str('{:>25}'.format(mems[x])))
 
-    print("------------------ Multi-cycle cpu ------------------")
-    print("Total # of cycles = " + str(cycle))
-    print("# of 3 cycles = " + str(threecycle))
-    print("% of instructions are 3 cycles = " + str(threecycle/pc) + " %")
-    print("# of 4 cycles = " + str(fourcycle))
-    print("% of instructions are 3 cycles = " + str(fourcycle/pc) + " %")
-    print("# of 5 cycles = " + str(fivecycle))
-    print("% of instructions are 3 cycles = " + str(fivecycle/pc) + " %")
+    if (diagnose == 1):
+        print("------------------ Multi-cycle cpu ------------------")
+        print("Total # of cycles = " + str(cycle))
+        print("# of 3 cycles = " + str(threecycle))
+        print("% of instructions are 3 cycles = " + str(threecycle/pc) + " %")
+        print("# of 4 cycles = " + str(fourcycle))
+        print("% of instructions are 3 cycles = " + str(fourcycle/pc) + " %")
+        print("# of 5 cycles = " + str(fivecycle))
+        print("% of instructions are 3 cycles = " + str(fivecycle/pc) + " %")
+    elif (diagnose == 2):
+        print("------------------ Slow pipeline cpu ------------------")
+        print("Total # of cycles = " + str(cycle))
+        print("Number of control hazards " + str(chSUM))
+        print("Number of data hazards " + str(dhSUM))
 
+def getCycle(argument):
+    switcher = {
+        1: "F",
+        2: "D",
+        3: "E",
+        4: "M",
+        0: "W",
+    }
+    return switcher.get((argument, "nothing"))
 
 def disassemble(instructions, diagnose):
     global n
@@ -86,12 +103,18 @@ def disassemble(instructions, diagnose):
     instr = []
     global pc
     global cycle
+    global dhSUM
+    global chSUM
     global threecycle
     global fourcycle
     global fivecycle
     global end
     global num_of_instr
     global counter
+
+
+    oldRD = -1
+
     while end != 1:
         # print(n)
 
@@ -99,6 +122,7 @@ def disassemble(instructions, diagnose):
 
         n = n + 1
         pc = pc + 1
+        currentPC = pc * 4
         # print(regs[12])
         counter = counter + 1
         s = int(instr[6:11], 2)
@@ -126,10 +150,24 @@ def disassemble(instructions, diagnose):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
-                print("ori $" + str(t) + ", $" + str(s) + ", 0d" + str(imm))
-                print("pc = " + str(pc*4) + "\n")
+            elif (diagnose == 2):
+                print("cycle: " + str(cycle))
+                if (oldRD == s or oldRD == t):
+                    print("Control hazard")
+                    print("Number of NOPs: 3")
+                    dhSUM += 1
+                else: 
+                    print("No hazard")
+                if (currentPC == 0):
+                    print("pipeline stage: F")
+                else:
+                    currentPC = currentPC % 5
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("ori $" + str(t) + ", $" + str(s) + ", 0d" + str(imm))
+            print("pc = " + str(pc*4) + "\n")
             cycle += 4
             fourcycle += 1
+            oldRD = t
 
         # ------------------ lw ------------------
 
@@ -145,10 +183,24 @@ def disassemble(instructions, diagnose):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 5 cycles")
-                print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
-                print("pc = " + str(pc*4) + "\n")
+            elif (diagnose == 2):
+                print("cycle: " + str(cycle))
+                if (oldRD == s or oldRD == t):
+                    print("Control hazard")
+                    print("Number of NOPs: 3")
+                    dhSUM += 1
+                else: 
+                    print("No hazard")
+                if (currentPC == 0):
+                    print("pipeline stage: F")
+                else:
+                    currentPC = currentPC % 5
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
+            print("pc = " + str(pc*4) + "\n")
             cycle += 5
             fivecycle += 1
+            oldRD = t
 
         # ------------------ addi ------------------
 
@@ -159,10 +211,24 @@ def disassemble(instructions, diagnose):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
-                print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
-                print("pc = " + str(pc*4) + "\n")
+            elif (diagnose == 2):
+                print("cycle: " + str(cycle))
+                if (oldRD == s or oldRD == t):
+                    print("Control hazard")
+                    print("Number of NOPs: 3")
+                    dhSUM += 1
+                else: 
+                    print("No hazard")
+                if (currentPC == 0):
+                    print("pipeline stage: F")
+                else:
+                    currentPC = currentPC % 5
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4) + "\n")
             cycle += 4
             fourcycle += 1
+            oldRD = t
 
         # ------------------ sw ------------------
 
@@ -178,8 +244,21 @@ def disassemble(instructions, diagnose):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
-                print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
-                print("pc = " + str(pc*4) + "\n")
+            elif (diagnose == 2):
+                print("cycle: " + str(cycle))
+                if (oldRD == s or oldRD == t):
+                    print("Control hazard")
+                    print("Number of NOPs: 3")
+                    dhSUM += 1
+                else: 
+                    print("No hazard")
+                if (currentPC == 0):
+                    print("pipeline stage: F")
+                else:
+                    currentPC = currentPC % 5
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
+            print("pc = " + str(pc*4) + "\n")
             cycle += 4
             fourcycle += 1
 
@@ -198,8 +277,21 @@ def disassemble(instructions, diagnose):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 3 cycles")
-                print("beq $" + str(t) + ", $" + str(s) + ", " + str(imm))
-                print("pc = " + str(pc*4) + "\n")
+            elif (diagnose == 2):
+                print("cycle: " + str(cycle))
+                if (oldRD == s or oldRD == t):
+                    print("Control hazard")
+                    print("Number of NOPs: 2")
+                    chSUM += 1
+                else: 
+                    print("No hazard")
+                if (currentPC == 0):
+                    print("pipeline stage: F")
+                else:
+                    currentPC = currentPC % 5
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("beq $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4) + "\n")
             cycle += 3
             threecycle += 1
 
@@ -214,8 +306,21 @@ def disassemble(instructions, diagnose):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 3 cycles")
-                print("bne $" + str(t) + ", $" + str(s) + ", " + str(imm))
-                print("pc = " + str(pc*4) + "\n")
+            elif (diagnose == 2):
+                print("cycle: " + str(cycle))
+                if (oldRD == s or oldRD == t):
+                    print("Control hazard")
+                    print("Number of NOPs: 2")
+                    chSUM += 1
+                else: 
+                    print("No hazard")
+                if (currentPC == 0):
+                    print("pipeline stage: F")
+                else:
+                    currentPC = currentPC % 5
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("bne $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4) + "\n")
             cycle += 3
             threecycle += 1
 
@@ -234,10 +339,24 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("add $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("add $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
 
             # ------------------ sub ------------------
 
@@ -248,10 +367,24 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("sub $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("sub $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
 
             # ------------------ slt ------------------
 
@@ -265,18 +398,32 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("slt $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("slt $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
 
             # ------------------ sltu ------------------
             if(instr[26:32] == "101011"):
                 outputFile.write("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
                 #S = regs[s] & allf
                 #T = regs[t] & allf
-                S = abs(S)
-                T = abs(T)
+                S = abs(regs[s])
+                T = abs(regs[t])
                 if(S < T):
                     regs[d] = 1
                 else:
@@ -285,24 +432,52 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
 
             # ------------------ addu ------------------
 
             if (instr[26:32] == "100001"):  # ADDU
                 outputFile.write("addu $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
-                regs[d] = regs[s] + regs[t]
+                regs[d] = abs(regs[s]) + abs(regs[t])
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("addu $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("addu $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
 
             # ------------------ sll ------------------
 
@@ -313,10 +488,24 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("sll $" + str(d) + ", $" + str(t) + ", " + str(sh))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("sll $" + str(d) + ", $" + str(t) + ", " + str(sh))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
 
             # ------------------ xor ------------------
 
@@ -327,10 +516,25 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                    print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
+                elif (diagnose == 2):
+                    print("cycle: " + str(cycle))
+                    if (oldRD == s or oldRD == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 3")
+                        dhSUM += 1
+                    else: 
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
                 cycle += 4
                 fourcycle += 1
+                oldRD = d
+        
 
 
 # It's not really necessary to understand how it works for this class, but it allows us to use this code as a module or a standalone program.
