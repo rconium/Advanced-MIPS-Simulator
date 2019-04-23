@@ -26,8 +26,16 @@ def main():
     global diagnose
     instructions = []  # Declares instructions to be an array
     num_of_instr = 0
+    diagnose = 0
 
-    diagnose = True if int(input("press 1 for diagnose mode else 0 for normal operation\n")) == 1 else False
+    choice = True if int(input("press 1 for diagnose mode else 0 for normal operation\n")) == 1 else False
+
+    if choice:
+        while (diagnose < 1 or diagnose > 3):
+            diagnose = int(input("1)multi-cycle\t\t2)slow pipeline\t\t3)fast pipeline\n"))
+            if (diagnose < 1 or diagnose > 3):
+                print("enter values from 1-3 ONLY puta")
+
 
     for line in inputFile:
         if (line == "\n" or line[0] == '#'):  # empty lines and comments ignored
@@ -115,7 +123,7 @@ def disassemble(instructions, diagnose):
             outputFile.write("ori $" + str(t) + ", $" + str(s) + ", 0d" + str(imm) + "\n")
             regs[t] = regs[s] | imm
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
-            if diagnose:
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
                 print("ori $" + str(t) + ", $" + str(s) + ", 0d" + str(imm))
@@ -134,7 +142,7 @@ def disassemble(instructions, diagnose):
             mems_index = mems_index + imm // 4
             regs[t] = mems[mems_index]
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
-            if diagnose:
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 5 cycles")
                 print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
@@ -148,7 +156,7 @@ def disassemble(instructions, diagnose):
             outputFile.write("addi $" + str(t) + ", $" + str(s) + ", " + str(imm) + "\n")
             regs[t] = regs[s] + imm
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
-            if diagnose:
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
                 print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
@@ -167,7 +175,7 @@ def disassemble(instructions, diagnose):
             mems_index = mems_index + (imm // 4)
             mems[mems_index] = regs[t]
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
-            if diagnose:
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
                 print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
@@ -187,7 +195,7 @@ def disassemble(instructions, diagnose):
             if (regs[t] == regs[s]):
                 pc = pc + imm
                 n = n + imm
-            if diagnose:
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 3 cycles")
                 print("beq $" + str(t) + ", $" + str(s) + ", " + str(imm))
@@ -203,7 +211,7 @@ def disassemble(instructions, diagnose):
             if (regs[t] != regs[s]):
                 pc = pc + imm
                 n = n + imm
-            if diagnose:
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 3 cycles")
                 print("bne $" + str(t) + ", $" + str(s) + ", " + str(imm))
@@ -223,7 +231,7 @@ def disassemble(instructions, diagnose):
                 outputFile.write("add $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
                 regs[d] = regs[s] + regs[t]
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("add $" + str(d) + ", $" + str(s) + ", $" + str(t))
@@ -237,7 +245,7 @@ def disassemble(instructions, diagnose):
                 outputFile.write("sub $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
                 regs[d] = regs[s] - regs[t]
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("sub $" + str(d) + ", $" + str(s) + ", $" + str(t))
@@ -254,7 +262,7 @@ def disassemble(instructions, diagnose):
                 else:
                     regs[d] = 0
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("slt $" + str(d) + ", $" + str(s) + ", $" + str(t))
@@ -265,14 +273,16 @@ def disassemble(instructions, diagnose):
             # ------------------ sltu ------------------
             if(instr[26:32] == "101011"):
                 outputFile.write("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
-                S = regs[s] & allf
-                T = regs[t] & allf
+                #S = regs[s] & allf
+                #T = regs[t] & allf
+                S = abs(S)
+                T = abs(T)
                 if(S < T):
                     regs[d] = 1
                 else:
                     regs[d] = 0
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t))
@@ -286,7 +296,7 @@ def disassemble(instructions, diagnose):
                 outputFile.write("addu $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
                 regs[d] = regs[s] + regs[t]
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("addu $" + str(d) + ", $" + str(s) + ", $" + str(t))
@@ -300,7 +310,7 @@ def disassemble(instructions, diagnose):
                 outputFile.write("sll $" + str(d) + ", $" + str(t) + ", " + str(sh) + "\n")
                 regs[d] = (regs[t] << sh) & (0xFFFFFFFF)
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("sll $" + str(d) + ", $" + str(t) + ", " + str(sh))
@@ -314,7 +324,7 @@ def disassemble(instructions, diagnose):
                 outputFile.write("xor $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
                 regs[d] = regs[s] ^ regs[t]
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
-                if diagnose:
+                if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
                     print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
