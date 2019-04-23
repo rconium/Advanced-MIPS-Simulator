@@ -1,6 +1,11 @@
 regs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; #Registers $0 ~ $23
 mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; #memory 0x2000 to 0x2050
 
+last_Instruction_stored = 0 #Detect for last instruction written into (2 NOPS)
+second_last_stored = 0 #Moves last instruction written here for 1 NOP
+pipeCycle = 4  #instruction should finish at "5th cycle"
+branchNOP = 0
+branchStall = 0
 cycle = 0
 threecycle = 0
 fourcycle = 0
@@ -69,7 +74,10 @@ def main():
     print("# of 4 cycles = " + str(fourcycle))
     print("% of instructions are 3 cycles = " + str(fourcycle/pc) + " %")
     print("# of 5 cycles = " + str(fivecycle))
-    print("% of instructions are 3 cycles = " + str(fivecycle/pc) + " %")
+    print("% of instructions are 3 cycles = " + str(fivecycle/pc) + " %" + "\n")
+    print("------------------- Slow-Pipe cpu -------------------")
+    print("Total # of cycles = " + str(cycle + branchNOP))
+    print("delays: " + str(branchStall))
 
 
 def disassemble(instructions, diagnose):
@@ -81,6 +89,11 @@ def disassemble(instructions, diagnose):
     global threecycle
     global fourcycle
     global fivecycle
+    global pipeCycle
+    global branchNOP
+    global branchStall
+    global last_Instruction_stored
+    global second_last_stored
     global end
     global num_of_instr
     global counter
@@ -89,8 +102,9 @@ def disassemble(instructions, diagnose):
 
         instr = instructions[n]
 
-        n = n + 1
-        pc = pc + 1
+        n += 1
+        pc += 1
+        pipeCycle += 1
         # print(regs[12])
         counter = counter + 1
         s = int(instr[6:11], 2)
@@ -194,6 +208,8 @@ def disassemble(instructions, diagnose):
                 print("pc = " + str(pc*4) + "\n")
             cycle += 3
             threecycle += 1
+            branchNOP = 3
+            branchStall += 1
 
         # ------------------ bne ------------------
 
@@ -210,6 +226,8 @@ def disassemble(instructions, diagnose):
                 print("pc = " + str(pc*4) + "\n")
             cycle += 3
             threecycle += 1
+            branchNOP = 3
+            branchStall += 1
 
         # -------------------------------------------- R TYPE --------------------------------------------
 
