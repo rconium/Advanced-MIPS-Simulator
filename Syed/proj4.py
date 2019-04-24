@@ -89,7 +89,7 @@ def main():
         print("finishing up the last instruction: " + "4")
         print("Number of control hazards " + str(chSUM))
         print("Number of data hazards " + str(dhSUM))
-
+        print("Total number of instructions in  slow pipeline: " + str(pipeCycles - 1 + chSUM + dhSUM + 4))
 def getCycle(argument):
     switcher = {
         1: "F",
