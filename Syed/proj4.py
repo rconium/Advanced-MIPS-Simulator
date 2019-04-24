@@ -209,7 +209,6 @@ def disassemble(instructions, diagnose):
                     print()
                 if (n+1 <= len(instructions) - 1):
                     tempRs1 = decoderRs1(instructions[n+1])
-                    print("Addu rs: ", tempRs1)
                     tempRt1 = decoderRt1(instructions[n+1])
                 else:
                     tempRs1 = 0
@@ -594,8 +593,6 @@ def disassemble(instructions, diagnose):
                 elif (diagnose == 2):
                     print("cycle: " + str(pipeCycles))
                     pipeCycles += 1
-                    print("s", tempRs1)
-                    print("t", tempRt1)
                 if (oldRD == tempRs1 or oldRD == tempRt1 ):
                     print("Data hazard")
                     print("Number of NOPs: 2")
