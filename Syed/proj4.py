@@ -1,7 +1,7 @@
 regs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; #Registers $0 ~ $23
 mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; #memory 0x2000 to 0x2050
 
-cycle = 1#fix from0
+cycle = 0#fix from0
 threecycle = 0
 fourcycle = 0
 fivecycle = 0
@@ -14,8 +14,7 @@ num_of_instr = 0
 counter = -1
 allf = 0xFFFFFFFF
 pipeCycles = 1
-tempRs = 0
-tempRt = 0
+
 inst_file = "instr_list.txt"
 outputFile = open(inst_file, "w")
 
@@ -241,7 +240,8 @@ def disassemble(instructions, diagnose):
                 print("Running 5 cycles")
                 cycle += 5
             elif (diagnose == 2):
-                print("cycle: " + str(cycle))
+                print("cycle: " + str(pipeCycles))
+                pipeCycles += 1
                 if (oldRD == s or oldRD == t):
                     print("Data hazard")
                     print("Number of NOPs: 3")
@@ -256,6 +256,7 @@ def disassemble(instructions, diagnose):
             print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
             print("pc = " + str(pc*4) + "\n")
             #cycle += 5
+            n = n  + 1
             fivecycle += 1
             oldRD = t
 
@@ -270,7 +271,8 @@ def disassemble(instructions, diagnose):
                 print("Running 4 cycles")
                 cycle += 4
             elif (diagnose == 2):
-                print("cycle: " + str(cycle))
+                print("cycle: " + str(pipeCycles))
+                pipeCycles += 1
                 if (oldRD == s or oldRD == t):
                     print("Data hazard")
                     print("Number of NOPs: 3")
@@ -285,6 +287,7 @@ def disassemble(instructions, diagnose):
             print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
             print("pc = " + str(pc*4) + "\n")
             #cycle += 4
+            n = n + 1
             fourcycle += 1
             oldRD = t
 
@@ -304,7 +307,8 @@ def disassemble(instructions, diagnose):
                 print("Running 4 cycles")
                 cycle += 4
             elif (diagnose == 2):
-                print("cycle: " + str(cycle))
+                print("cycle: " + str(pipeCycles))
+                pipeCycles += 1
                 if (oldRD == s or oldRD == t):
                     print("Data hazard")
                     print("Number of NOPs: 3")
@@ -319,6 +323,7 @@ def disassemble(instructions, diagnose):
             print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
             print("pc = " + str(pc*4) + "\n")
             #cycle += 4
+            n = n + 1
             fourcycle += 1
 
         # ------------------ beq ------------------
@@ -667,7 +672,8 @@ def disassemble(instructions, diagnose):
                     print("Running 4 cycles")
                     cycle += 4
                 elif (diagnose == 2):
-                    print("cycle: " + str(cycle))
+                    print("cycle: " + str(pipeCycles))
+                    pipeCycles += 1
                     if (oldRD == s or oldRD == t):
                         print("Data hazard")
                         print("Number of NOPs: 3")
@@ -682,6 +688,7 @@ def disassemble(instructions, diagnose):
                 print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
                 print("pc = " + str(pc * 4) + "\n")
                 #cycle += 4
+                n = n + 1
                 fourcycle += 1
                 oldRD = d
 
