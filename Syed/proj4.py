@@ -235,16 +235,23 @@ def disassemble(instructions, diagnose):
             mems_index = mems_index + imm // 4
             regs[t] = mems[mems_index]
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
+            print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
+            print("pc = " + str(pc*4))
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 5 cycles")
+                print()
                 cycle += 5
             elif (diagnose == 2):
                 print("cycle: " + str(pipeCycles))
                 pipeCycles += 1
-                if (oldRD == s or oldRD == t):
+                if (oldRD == tempRs1 or oldRD == tempRt1 ):
                     print("Data hazard")
-                    print("Number of NOPs: 3")
+                    print("Number of NOPs: 2")
+                    dhSUM += 2
+                elif (oldRD == tempRs2 or oldRD == tempRt2):
+                    print("Data hazard")
+                    print("Number of NOPs: 1")
                     dhSUM += 1
                 else:
                     print("No hazard")
@@ -253,8 +260,21 @@ def disassemble(instructions, diagnose):
                 else:
                     currentPC = currentPC % 5
                     print("pipeline stage: " + str(getCycle(currentPC)))
-            print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
-            print("pc = " + str(pc*4) + "\n")
+                    print()
+                if (n+1 <= len(instructions) - 1):
+                    tempRs1 = decoderRs1(instructions[n+1])
+                    tempRt1 = decoderRt1(instructions[n+1])
+                else:
+                    tempRs1 = 0
+                    tempRt1 = 0
+
+                if (n+2 <= len(instructions) - 1 ):
+                    tempRs2 = decoderRs2(instructions[n+2])
+                    tempRt2 = decoderRt2(instructions[n+2])
+                else:
+                    tempRs2 = 0
+                    tempRt2 = 0
+
             #cycle += 5
             n = n  + 1
             fivecycle += 1
@@ -266,26 +286,47 @@ def disassemble(instructions, diagnose):
             outputFile.write("addi $" + str(t) + ", $" + str(s) + ", " + str(imm) + "\n")
             regs[t] = regs[s] + imm
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
+            print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4))
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
+                print()
                 cycle += 4
             elif (diagnose == 2):
                 print("cycle: " + str(pipeCycles))
                 pipeCycles += 1
-                if (oldRD == s or oldRD == t):
+                if (oldRD == tempRs1 or oldRD == tempRt1 ):
                     print("Data hazard")
-                    print("Number of NOPs: 3")
+                    print("Number of NOPs: 2")
+                    dhSUM += 2
+                elif (oldRD == tempRs2 or oldRD == tempRt2):
+                    print("Data hazard")
+                    print("Number of NOPs: 1")
                     dhSUM += 1
                 else:
                     print("No hazard")
                 if (currentPC == 0):
                     print("pipeline stage: F")
+                    print()
                 else:
                     currentPC = currentPC % 5
                     print("pipeline stage: " + str(getCycle(currentPC)))
-            print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
-            print("pc = " + str(pc*4) + "\n")
+                    print()
+                if (n+1 <= len(instructions) - 1):
+                    tempRs1 = decoderRs1(instructions[n+1])
+                    tempRt1 = decoderRt1(instructions[n+1])
+                else:
+                    tempRs1 = 0
+                    tempRt1 = 0
+
+                if (n+2 <= len(instructions) - 1 ):
+                    tempRs2 = decoderRs2(instructions[n+2])
+                    tempRt2 = decoderRt2(instructions[n+2])
+                else:
+                    tempRs2 = 0
+                    tempRt2 = 0
+
             #cycle += 4
             n = n + 1
             fourcycle += 1
@@ -302,16 +343,23 @@ def disassemble(instructions, diagnose):
             mems_index = mems_index + (imm // 4)
             mems[mems_index] = regs[t]
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
+            print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
+            print("pc = " + str(pc*4))
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
+                print()
                 cycle += 4
             elif (diagnose == 2):
                 print("cycle: " + str(pipeCycles))
                 pipeCycles += 1
-                if (oldRD == s or oldRD == t):
+                if (oldRD == tempRs1 or oldRD == tempRt1 ):
                     print("Data hazard")
-                    print("Number of NOPs: 3")
+                    print("Number of NOPs: 2")
+                    dhSUM += 2
+                elif (oldRD == tempRs2 or oldRD == tempRt2):
+                    print("Data hazard")
+                    print("Number of NOPs: 1")
                     dhSUM += 1
                 else:
                     print("No hazard")
@@ -320,8 +368,21 @@ def disassemble(instructions, diagnose):
                 else:
                     currentPC = currentPC % 5
                     print("pipeline stage: " + str(getCycle(currentPC)))
-            print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
-            print("pc = " + str(pc*4) + "\n")
+                    print()
+                if (n+1 <= len(instructions) - 1):
+                    tempRs1 = decoderRs1(instructions[n+1])
+                    tempRt1 = decoderRt1(instructions[n+1])
+                else:
+                    tempRs1 = 0
+                    tempRt1 = 0
+
+                if (n+2 <= len(instructions) - 1 ):
+                    tempRs2 = decoderRs2(instructions[n+2])
+                    tempRt2 = decoderRt2(instructions[n+2])
+                else:
+                    tempRs2 = 0
+                    tempRt2 = 0
+
             #cycle += 4
             n = n + 1
             fourcycle += 1
@@ -436,40 +497,41 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
+                    print()
                     cycle += 4
                 elif (diagnose == 2):
                     print("cycle: " + str(pipeCycles))
                     pipeCycles += 1
-                if (oldRD == tempRs1 or oldRD == tempRt1 ):
-                    print("Data hazard")
-                    print("Number of NOPs: 2")
-                    dhSUM += 2
-                elif (oldRD == tempRs2 or oldRD == tempRt2):
-                    print("Data hazard")
-                    print("Number of NOPs: 1")
-                    dhSUM += 1
-                else:
-                    print("No hazard")
-                if (currentPC == 0):
-                    print("pipeline stage: F")
-                    print()
-                else:
-                    currentPC = currentPC % 5
-                    print("pipeline stage: " + str(getCycle(currentPC)))
-                    print()
-                if (n+1 <= len(instructions) - 1):
-                    tempRs1 = decoderRs1(instructions[n+1])
-                    tempRt1 = decoderRt1(instructions[n+1])
-                else:
-                    tempRs1 = 0
-                    tempRt1 = 0
+                    if (oldRD == tempRs1 or oldRD == tempRt1 ):
+                        print("Data hazard")
+                        print("Number of NOPs: 2")
+                        dhSUM += 2
+                    elif (oldRD == tempRs2 or oldRD == tempRt2):
+                        print("Data hazard")
+                        print("Number of NOPs: 1")
+                        dhSUM += 1
+                    else:
+                        print("No hazard")
+                    if (currentPC == 0):
+                        print("pipeline stage: F")
+                        print()
+                    else:
+                        currentPC = currentPC % 5
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                        print()
+                    if (n+1 <= len(instructions) - 1):
+                        tempRs1 = decoderRs1(instructions[n+1])
+                        tempRt1 = decoderRt1(instructions[n+1])
+                    else:
+                        tempRs1 = 0
+                        tempRt1 = 0
 
-                if (n+2 <= len(instructions) - 1 ):
-                    tempRs2 = decoderRs2(instructions[n+2])
-                    tempRt2 = decoderRt2(instructions[n+2])
-                else:
-                    tempRs2 = 0
-                    tempRt2 = 0
+                    if (n+2 <= len(instructions) - 1 ):
+                        tempRs2 = decoderRs2(instructions[n+2])
+                        tempRt2 = decoderRt2(instructions[n+2])
+                    else:
+                        tempRs2 = 0
+                        tempRt2 = 0
                 #cycle += 4
                 n = n + 1
                 fourcycle += 1
@@ -489,6 +551,7 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
+                    print()
                     cycle += 4
                 elif (diagnose == 2):
                     print("cycle: " + str(pipeCycles))
@@ -545,6 +608,7 @@ def disassemble(instructions, diagnose):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
+                    print()
                     cycle += 4
                 elif (diagnose == 2):
                     print("cycle: " + str(pipeCycles))
@@ -667,16 +731,23 @@ def disassemble(instructions, diagnose):
                 outputFile.write("xor $" + str(d) + ", $" + str(s) + ", $" + str(t) + "\n")
                 regs[d] = regs[s] ^ regs[t]
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
+                print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4))
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
+                    print()
                     cycle += 4
                 elif (diagnose == 2):
                     print("cycle: " + str(pipeCycles))
                     pipeCycles += 1
-                    if (oldRD == s or oldRD == t):
+                    if (oldRD == tempRs1 or oldRD == tempRt1 ):
                         print("Data hazard")
-                        print("Number of NOPs: 3")
+                        print("Number of NOPs: 2")
+                        dhSUM += 2
+                    elif (oldRD == tempRs2 or oldRD == tempRt2):
+                        print("Data hazard")
+                        print("Number of NOPs: 1")
                         dhSUM += 1
                     else:
                         print("No hazard")
@@ -685,8 +756,21 @@ def disassemble(instructions, diagnose):
                     else:
                         currentPC = currentPC % 5
                         print("pipeline stage: " + str(getCycle(currentPC)))
-                print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                print("pc = " + str(pc * 4) + "\n")
+                        print()
+                    if (n+1 <= len(instructions) - 1):
+                        tempRs1 = decoderRs1(instructions[n+1])
+                        tempRt1 = decoderRt1(instructions[n+1])
+                    else:
+                        tempRs1 = 0
+                        tempRt1 = 0
+
+                    if (n+2 <= len(instructions) - 1 ):
+                        tempRs2 = decoderRs2(instructions[n+2])
+                        tempRt2 = decoderRt2(instructions[n+2])
+                    else:
+                        tempRs2 = 0
+                        tempRt2 = 0
+
                 #cycle += 4
                 n = n + 1
                 fourcycle += 1
