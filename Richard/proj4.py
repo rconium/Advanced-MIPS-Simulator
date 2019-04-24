@@ -100,7 +100,7 @@ def disassemble(instructions, diagnose, choice):
     global counter
 
 
-    oldRD = -1
+    skip = False
 
     while end != 1:
         # print(n)
@@ -144,7 +144,8 @@ def disassemble(instructions, diagnose, choice):
                         print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
-                if (n+2 <= len(instructions) - 1):
+                        skip = True
+                if (n+2 <= len(instructions) - 1 and not skip):
                     if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
                         print("Data hazard")
                         print("Number of NOPs: 1")
@@ -183,7 +184,8 @@ def disassemble(instructions, diagnose, choice):
                         print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
-                if (n+2 <= len(instructions) - 1):
+                        skip = True
+                if (n+2 <= len(instructions) - 1 and not skip):
                     if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
                         print("Data hazard")
                         print("Number of NOPs: 1")
@@ -217,7 +219,8 @@ def disassemble(instructions, diagnose, choice):
                         print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
-                if (n+2 <= len(instructions) - 1):
+                        skip = True
+                if (n+2 <= len(instructions) - 1 and not skip):
                     if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
                         print("Data hazard")
                         print("Number of NOPs: 1")
@@ -348,7 +351,8 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -382,7 +386,8 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -419,7 +424,8 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -459,7 +465,8 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -488,12 +495,13 @@ def disassemble(instructions, diagnose, choice):
                 elif (diagnose == 2 or choice == 0):
                     print("cycle: " + str(cycle))
                     if (n+1 <= len(instructions) - 1):
-                        if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 2]) == d):
+                        if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -509,7 +517,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
 
             # ------------------ sll ------------------
 
@@ -528,7 +535,8 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -544,7 +552,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
 
             # ------------------ xor ------------------
 
@@ -563,7 +570,8 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    if (n+2 <= len(instructions) - 1):
+                            skip = True
+                    if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 1")
@@ -579,7 +587,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
         n = n + 1
         
 
