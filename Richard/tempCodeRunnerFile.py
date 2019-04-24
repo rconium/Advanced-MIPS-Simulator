@@ -1,1 +1,1 @@
-print("cycle: " + str(cycle))
+print("Number of NOPs: 2")
