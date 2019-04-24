@@ -144,9 +144,12 @@ def disassemble(instructions, diagnose, choice):
                         print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
-                else: 
-                    print("No hazard")
-                
+                if (n+2 <= len(instructions) - 1):
+                    if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 1")
+                        NOP += 1
+                        dhSUM += 1
                 if (currentPC == 0):
                     print("pipeline stage: F")
                 else:
@@ -157,7 +160,6 @@ def disassemble(instructions, diagnose, choice):
             cycle += 4
             pipeIntrs += 1
             fourcycle += 1
-            oldRD = t
 
         # ------------------ lw ------------------
 
@@ -181,8 +183,12 @@ def disassemble(instructions, diagnose, choice):
                         print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
-                else: 
-                    print("No hazard")
+                if (n+2 <= len(instructions) - 1):
+                    if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 1")
+                        NOP += 1
+                        dhSUM += 1
                 if (currentPC == 0):
                     print("pipeline stage: F")
                 else:
@@ -193,7 +199,6 @@ def disassemble(instructions, diagnose, choice):
             cycle += 5 
             pipeIntrs += 1
             fivecycle += 1
-            oldRD = t
 
         # ------------------ addi ------------------
 
@@ -212,8 +217,12 @@ def disassemble(instructions, diagnose, choice):
                         print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
-                else: 
-                    print("No hazard")
+                if (n+2 <= len(instructions) - 1):
+                    if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
+                        print("Data hazard")
+                        print("Number of NOPs: 1")
+                        NOP += 1
+                        dhSUM += 1
                 if (currentPC == 0):
                     print("pipeline stage: F")
                 else:
@@ -224,7 +233,6 @@ def disassemble(instructions, diagnose, choice):
             cycle += 4 
             pipeIntrs += 1
             fourcycle += 1
-            oldRD = t
 
         # ------------------ sw ------------------
 
@@ -340,8 +348,12 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
@@ -352,7 +364,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
 
             # ------------------ sub ------------------
 
@@ -371,8 +382,12 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
@@ -383,7 +398,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
 
             # ------------------ slt ------------------
 
@@ -405,8 +419,12 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
@@ -417,7 +435,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
 
             # ------------------ sltu ------------------
             if(instr[26:32] == "101011"):
@@ -442,8 +459,12 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
@@ -454,7 +475,6 @@ def disassemble(instructions, diagnose, choice):
                 cycle += 4 
                 pipeIntrs += 1
                 fourcycle += 1
-                oldRD = d
 
             # ------------------ addu ------------------
 
@@ -468,13 +488,17 @@ def disassemble(instructions, diagnose, choice):
                 elif (diagnose == 2 or choice == 0):
                     print("cycle: " + str(cycle))
                     if (n+1 <= len(instructions) - 1):
-                        if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
+                        if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 2]) == d):
                             print("Data hazard")
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
@@ -504,8 +528,12 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
@@ -535,8 +563,12 @@ def disassemble(instructions, diagnose, choice):
                             print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
-                    else: 
-                        print("No hazard")
+                    if (n+2 <= len(instructions) - 1):
+                        if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
+                            NOP += 1
+                            dhSUM += 1
                     if (currentPC == 0):
                         print("pipeline stage: F")
                     else:
