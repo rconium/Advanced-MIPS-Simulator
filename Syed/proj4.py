@@ -450,7 +450,7 @@ def disassemble(instructions, diagnose):
             print("pc = " + str(pc*4) + "\n")
             #cycle += 3
             threecycle += 1
-
+            n = n + 1
         # -------------------------------------------- R TYPE --------------------------------------------
 
         if (instr[0:6] == "000000"):
