@@ -30,7 +30,7 @@ class Block:
         self.data = [0 for i in range(word_num)]
         self.wd_num = word_num
         self.tag = None
-        self.vali = 0
+        self.valid = 0
         self.used_tag = 0     # for LRU mechanism
 
 
@@ -77,7 +77,7 @@ class Blocks:
 
         for i in range(self.way_num):
             # hit
-            if target_tag == self[block_index][i].tag and self[block_index][i].vali == 1:
+            if target_tag == self[block_index][i].tag and self[block_index][i].valid == 1:
                 self[block_index][i].used_tag = block_used_tag
                 self.hit_num += 1
                 return True
@@ -85,7 +85,7 @@ class Blocks:
         min_tag = 0
         min_index = 0
         for i in range(self.way_num):
-            if self[block_index][i].vali == 0:
+            if self[block_index][i].valid == 0:
                 min_index = i
                 break
             if self[block_index][i].used_tag < min_tag:
@@ -96,7 +96,7 @@ class Blocks:
         # target mem address
         mems_index_address: int = (int(mems_index, 2) - int(mems_index[- self.word_bit:], 2) - 8192) // 4
         self[block_index][min_index].data = mems[mems_index_address: mems_index_address + self.wd_num]
-        self[block_index][min_index].vali = 1
+        self[block_index][min_index].valid = 1
         self[block_index][min_index].used_tag = block_used_tag
 
         return False
@@ -113,13 +113,13 @@ class Blocks:
 
         for i in range(self.way_num):
             # hit
-            if target_tag == self[block_index][i].tag and self[block_index][i].vali == 1:
+            if target_tag == self[block_index][i].tag and self[block_index][i].valid == 1:
                 return self[block_index][i]
         # miss
         min_tag = 0
         min_index = 0
         for i in range(self.way_num):
-            if self[block_index][i].vali == 0:
+            if self[block_index][i].valid == 0:
                 min_index = i
                 break
             if self[block_index][i].used_tag < min_tag:
@@ -132,7 +132,7 @@ class Blocks:
         if self.way_num == 1:
             for i in range(self.blk_num):
                 print("        block", i, ":")
-                print("                  valid:", self[i][0].vali)
+                print("                  valid:", self[i][0].valid)
                 print("                  tag  :", format(self[i][0].tag))
                 for j in self[i][0].data:
                     if j < 0:
@@ -145,7 +145,7 @@ class Blocks:
                 # valid
                 tmp_string = ''
                 for j in range(self.way_num):
-                    tmp_string += "                  valid:   " + str(self[i][j].vali)
+                    tmp_string += "                  valid:   " + str(self[i][j].valid)
                 print(tmp_string)
 
                 # tags
@@ -153,6 +153,7 @@ class Blocks:
                 for j in range(self.way_num):
                     tmp_string += "                  tag  :" + str(self[i][j].tag)
                 print(tmp_string)
+
 
 
 
@@ -365,7 +366,7 @@ def disassemble(instructions, diagnose, choice):
             block_index = cache_DM.get_blk_index(mems_index)
             target_block = cache_DM.get_the_block_need_to_write(mems_index)
             print("   blk/set to access :", block_index)
-            print("   valid bit         :", target_block.vali)
+            print("   valid bit         :", target_block.valid)
             print("   tag               :", target_block.tag)
             hit = cache_DM.read(mems_index)
             print("   hit or not        :", hit)
@@ -382,7 +383,7 @@ def disassemble(instructions, diagnose, choice):
             block_index = cache_FA.get_blk_index(mems_index)
             target_block = cache_FA.get_the_block_need_to_write(mems_index)
             print("   blk/set to access :", block_index)
-            print("   valid bit         :", target_block.vali)
+            print("   valid bit         :", target_block.valid)
             print("   tag               :", target_block.tag)
             hit = cache_FA.read(mems_index)
             print("   hit or not        :", hit)
@@ -399,7 +400,7 @@ def disassemble(instructions, diagnose, choice):
             block_index = cache_SA.get_blk_index(mems_index)
             target_block = cache_SA.get_the_block_need_to_write(mems_index)
             print("   blk/set to access :", block_index)
-            print("   valid bit         :", target_block.vali)
+            print("   valid bit         :", target_block.valid)
             print("   tag               :", target_block.tag)
             hit = cache_SA.read(mems_index)
             print("   hit or not        :", hit)
@@ -414,7 +415,7 @@ def disassemble(instructions, diagnose, choice):
             block_index = cache_e.get_blk_index(mems_index)
             target_block = cache_e.get_the_block_need_to_write(mems_index)
             print("   blk/set to access :", block_index)
-            print("   valid bit         :", target_block.vali)
+            print("   valid bit         :", target_block.valid)
             print("   tag               :", target_block.tag)
             hit = cache_e.read(mems_index)
             print("   hit or not        :", hit)
