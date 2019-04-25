@@ -192,17 +192,18 @@ def main():
                 print("enter values from 1-3 ONLY puta")
 
         # DM (b=8, N=1, S=8)
-        cache_DM = Blocks(8, 1, 8)
+        #cache_DM = Blocks(8, 1, 8)
         # FA, 4 blocks, 2 words each block
-        cache_FA = Blocks(16, 4, 1)
+        #cache_FA = Blocks(16, 4, 1)
         # 2way-SA, total 8 blocks, 2 words each block
-        cache_SA = Blocks(8, 2, 4)
+        #cache_SA = Blocks(8, 2, 4)
         # User Customized cache configuration
         print("Select Cache Configuration:")
         block = int(input("block size:"))
         way = int(input("way:"))
         sets = int(input("set:"))
         cache_user = Blocks(block, way, sets)
+        cache_DM = cache_SA = cache_FA = cache_user
 
     for line in inputFile:
         if (line == "\n" or line[0] == '#'):  # empty lines and comments ignored
