@@ -155,6 +155,17 @@ class Blocks:
                     output += "                  tag  :" + str(self[i][j].tag)
                 print(output)
 
+                # content
+                for j in range(self.wd_num):
+                    tmp_string = ''
+                    for k in range(self.way_num):
+
+                        ele = self[i][k].data[j]
+                        if ele < 0:
+                            ele = 2**32 + ele
+                        output += "                  0x" + format(ele, '08x')
+                    print(output)
+
                 
 def main():
     fileName = input("Please enter MIPS instruction file name: ")
