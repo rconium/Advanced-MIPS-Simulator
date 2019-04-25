@@ -1,6 +1,6 @@
 regs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; #Registers $0 ~ $23
-mem_range = 1024
-mems = [0 for i in range(mem_range)]
+mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0] #mem 0x2000 to 0x2050
+i = mems
 mems_location = [0x2000, 0x2004, 0x2008, 0x200c, 0x2010, 0x2014, 0x2018, 0x201c, 0x2020, 0x2024, 0x2028, 0x202c, 0x2030, 0x2034, 0x2038, 0x203c, 0x2040, 0x2044, 0x2048, 0x204c, 0x2050]
 
 cycle = 0
@@ -27,7 +27,7 @@ block_used_tag = 0           # for LRU mechanism
 
 class Block:
     def __init__(self, word_num):
-        self.info = [0 for i in range(word_num)]
+        self.data = [0 for i in range(word_num)]
         self.wd_num = word_num
         self.tag = None
         self.vali = 0
@@ -35,14 +35,15 @@ class Block:
 
 
 class Blocks:
-    def __init__(self, way_num, blk_num, wd_num):
+    #wrd   set
+    def __init__(self, wd_num, way_num, blk_num):
         self.way_num = way_num
         self.blk_num = blk_num
         self.wd_num = wd_num
-        self.info = []
+        self.data = []
         for i in range(blk_num):
             tmp_set = [Block(wd_num) for j in range(way_num)]
-            self.info.append(tmp_set)
+            self.data.append(tmp_set)
 
         self.block_bit: int = ceil(log(self.blk_num, 2))
         self.word_bit: int = ceil(log(self.wd_num, 2)) + 2   # in block offset bits
@@ -50,7 +51,7 @@ class Blocks:
         self.hit_num = 0
 
     def __getitem__(self, n):
-        return self.info[n]
+        return self.data[n]
 
     def get_blk_index(self, mems_index):
         if type(mems_index) == type(1):
@@ -70,33 +71,33 @@ class Blocks:
         target_tag = int(mems_index[0: 32 - self.block_bit - self.word_bit], 2)
 
         if self.blk_num == 1:
-            target_block_index = 0
+            block_index = 0
         else:
-            target_block_index = int(mems_index[32 - self.block_bit - self.word_bit: 32 - self.word_bit], 2)
+            block_index = int(mems_index[32 - self.block_bit - self.word_bit: 32 - self.word_bit], 2)
 
         for i in range(self.way_num):
             # hit
-            if target_tag == self[target_block_index][i].tag and self[target_block_index][i].vali == 1:
-                self[target_block_index][i].used_tag = block_used_tag
+            if target_tag == self[block_index][i].tag and self[block_index][i].vali == 1:
+                self[block_index][i].used_tag = block_used_tag
                 self.hit_num += 1
                 return True
         # miss
         min_tag = 0
         min_index = 0
         for i in range(self.way_num):
-            if self[target_block_index][i].vali == 0:
+            if self[block_index][i].vali == 0:
                 min_index = i
                 break
-            if self[target_block_index][i].used_tag < min_tag:
-                min_tag = self[target_block_index][i].used_tag
+            if self[block_index][i].used_tag < min_tag:
+                min_tag = self[block_index][i].used_tag
                 min_index = i
 
-        self[target_block_index][min_index].tag = target_tag
+        self[block_index][min_index].tag = target_tag
         # target mem address
         mems_index_address: int = (int(mems_index, 2) - int(mems_index[- self.word_bit:], 2) - 8192) // 4
-        self[target_block_index][min_index].info = mems[mems_index_address: mems_index_address + self.wd_num]
-        self[target_block_index][min_index].vali = 1
-        self[target_block_index][min_index].used_tag = block_used_tag
+        self[block_index][min_index].data = mems[mems_index_address: mems_index_address + self.wd_num]
+        self[block_index][min_index].vali = 1
+        self[block_index][min_index].used_tag = block_used_tag
 
         return False
 
@@ -106,26 +107,26 @@ class Blocks:
 
         target_tag = int(mems_index[0: 32 - self.block_bit - self.word_bit], 2)
         if self.blk_num == 1:
-            target_block_index = 0
+            block_index = 0
         else:
-            target_block_index = int(mems_index[32 - self.block_bit - self.word_bit: 32 - self.word_bit], 2)
+            block_index = int(mems_index[32 - self.block_bit - self.word_bit: 32 - self.word_bit], 2)
 
         for i in range(self.way_num):
             # hit
-            if target_tag == self[target_block_index][i].tag and self[target_block_index][i].vali == 1:
-                return self[target_block_index][i]
+            if target_tag == self[block_index][i].tag and self[block_index][i].vali == 1:
+                return self[block_index][i]
         # miss
         min_tag = 0
         min_index = 0
         for i in range(self.way_num):
-            if self[target_block_index][i].vali == 0:
+            if self[block_index][i].vali == 0:
                 min_index = i
                 break
-            if self[target_block_index][i].used_tag < min_tag:
-                min_tag = self[target_block_index][i].used_tag
+            if self[block_index][i].used_tag < min_tag:
+                min_tag = self[block_index][i].used_tag
                 min_index = i
 
-        return self[target_block_index][min_index]
+        return self[block_index][min_index]
 
     def show(self):
         if self.way_num == 1:
@@ -133,7 +134,7 @@ class Blocks:
                 print("        block", i, ":")
                 print("                  valid:", self[i][0].vali)
                 print("                  tag  :", format(self[i][0].tag))
-                for j in self[i][0].info:
+                for j in self[i][0].data:
                     if j < 0:
                         j = 2**32 + j
                     print("                  0x" + format(j, '08x'))
@@ -141,7 +142,7 @@ class Blocks:
             for i in range(self.blk_num):
                 print("         set", i, ":")
 
-                # valid bits
+                # valid
                 tmp_string = ''
                 for j in range(self.way_num):
                     tmp_string += "                  valid:   " + str(self[i][j].vali)
@@ -163,9 +164,9 @@ def main():
     outputFile = open(inst_file, "w")
     global instructions
     global diagnose
-    global cache_a
-    global cache_c
-    global cache_d
+    global cache_DM
+    global cache_FA
+    global cache_SA
     global cache_e
     instructions = []  # Declares instructions to be an array
     num_of_instr = 0
@@ -179,17 +180,17 @@ def main():
             if (diagnose < 1 or diagnose > 3):
                 print("enter values from 1-3 ONLY puta")
     # DM (b=8, N=1, S=8)
-    cache_a = Blocks(1, 8, 8)
+    cache_DM = Blocks(8, 1, 8)
     # C. FA, 4 blocks, 2 words each block
-    cache_c = Blocks(4, 1, 16)
+    cache_FA = Blocks(16, 4, 1)
     # D. 2way-SA, total 8 blocks, 2 words each block
-    cache_d = Blocks(2, 4, 8)
+    cache_SA = Blocks(8, 2, 4)
     # E. Customized cache configuration
-    print("You can customize your cache configuration:")
-    word = int(input("block size(wd):"))
-    way = int(input("num of way:"))
-    sets = int(input("num of set:"))
-    cache_e = Blocks(way, sets, word)
+    print("Select Cache Configuration:")
+    block = int(input("block size:"))
+    way = int(input("way:"))
+    sets = int(input("set:"))
+    cache_e = Blocks(block, way, sets)
 
 
     for line in inputFile:
@@ -204,14 +205,14 @@ def main():
     disassemble(instructions, diagnose, choice)
 
     if (diagnose == 1 or choice == 0):
-        print("For cache configuration A:")
-        print("    Hit rate: %.2f" % (cache_a.hit_num / cache_a.read_num))
-        print("For cache configuration C:")
-        print("    Hit rate: %.2f" % (cache_c.hit_num / cache_c.read_num))
-        print("For cache configuration D:")
-        print("    Hit rate: %.2f" % (cache_d.hit_num / cache_d.read_num))
-        print("For cache configuration E:")
-        print("    Hit rate: %.2f" % (cache_e.hit_num / cache_e.read_num))
+        print("Directly-mapped cache:")
+        print("    Hit rate: %.2f" % (cache_DM.hit_num / cache_DM.read_num) + " %")
+        print("Fully-associated cache:")
+        print("    Hit rate: %.2f" % (cache_FA.hit_num / cache_FA.read_num) + " %")
+        print("2-way set-associatve cache:")
+        print("    Hit rate: %.2f" % (cache_SA.hit_num / cache_SA.read_num) + " %")
+        print("User set cache configuration:")
+        print("    Hit rate: %.2f" % (cache_e.hit_num / cache_e.read_num) + " %")
         print("------------------ Multi-cycle cpu ------------------")
         print("Total # of cycles = " + str(cycle))
         print("# of 3 cycles = " + str(threecycle))
@@ -359,72 +360,73 @@ def disassemble(instructions, diagnose, choice):
             print("pc = " + str(pc*4) + "\n")
             print("------------------------- cache -------------------------")
             print("target" + hex(mems_location[mems_index]))
-            # cache A
-            print("A. DM, 4 blocks, 4 words each block")
-            target_block_index = cache_a.get_blk_index(mems_index)
-            target_block = cache_a.get_the_block_need_to_write(mems_index)
-            print("   blk/set to access :", target_block_index)
+            # DM Cache
+            print("DM cache, block size of 2 words, 8 blocksz")
+            block_index = cache_DM.get_blk_index(mems_index)
+            target_block = cache_DM.get_the_block_need_to_write(mems_index)
+            print("   blk/set to access :", block_index)
             print("   valid bit         :", target_block.vali)
             print("   tag               :", target_block.tag)
-            hit = cache_a.read(mems_index)
+            hit = cache_DM.read(mems_index)
             print("   hit or not        :", hit)
             if hit:
-                print("   cache update info : no update ")
+                print("   cache update data : no update ")
 
             else:
-                print("   cache update info :")
-                cache_a.show()
+                print("   cache update data :")
+                cache_DM.show()
 
-
+            #FA Cache
             print()
-            print("C. FA, 4 blocks, 2 words each block")
-            target_block_index = cache_c.get_blk_index(mems_index)
-            target_block = cache_c.get_the_block_need_to_write(mems_index)
-            print("   blk/set to access :", target_block_index)
+            print("FA cache, block size of 4 words, 4 blocks")
+            block_index = cache_FA.get_blk_index(mems_index)
+            target_block = cache_FA.get_the_block_need_to_write(mems_index)
+            print("   blk/set to access :", block_index)
             print("   valid bit         :", target_block.vali)
             print("   tag               :", target_block.tag)
-            hit = cache_c.read(mems_index)
+            hit = cache_FA.read(mems_index)
             print("   hit or not        :", hit)
             if hit:
-                print("   cache update info : no update ")
+                print("   cache update data : no update ")
 
             else:
-                print("   cache update info :")
-                cache_c.show()
+                print("   cache update data :")
+                cache_FA.show()
 
+            #2 way set-associative cache
             print()
-            print("D. 2way-SA, total 8 blocks, 2 words each block")
-            target_block_index = cache_d.get_blk_index(mems_index)
-            target_block = cache_d.get_the_block_need_to_write(mems_index)
-            print("   blk/set to access :", target_block_index)
+            print("2 way SA cache, block size of 8 bytes, 4 sets")
+            block_index = cache_SA.get_blk_index(mems_index)
+            target_block = cache_SA.get_the_block_need_to_write(mems_index)
+            print("   blk/set to access :", block_index)
             print("   valid bit         :", target_block.vali)
             print("   tag               :", target_block.tag)
-            hit = cache_d.read(mems_index)
+            hit = cache_SA.read(mems_index)
             print("   hit or not        :", hit)
             if hit:
-                print("   cache update info : no update ")
+                print("   cache update data : no update ")
 
             else:
-                print("   cache update info :")
-                cache_d.show()
+                print("   cache update data :")
+                cache_SA.show()
             print()
             print("E. Customized cache configuration ")
-            target_block_index = cache_e.get_blk_index(mems_index)
+            block_index = cache_e.get_blk_index(mems_index)
             target_block = cache_e.get_the_block_need_to_write(mems_index)
-            print("   blk/set to access :", target_block_index)
+            print("   blk/set to access :", block_index)
             print("   valid bit         :", target_block.vali)
             print("   tag               :", target_block.tag)
             hit = cache_e.read(mems_index)
             print("   hit or not        :", hit)
             if hit:
-                print("   cache update info : no update ")
+                print("   cache update data : no update ")
 
             else:
-                print("   cache update info :")
+                print("   cache update data :")
                 cache_e.show()
 
            
-            print("=== Cache Log End ====\n")
+            print("------------------- end --------------------\n")
             cycle += 5 
             pipeIntrs += 1
             fivecycle += 1
