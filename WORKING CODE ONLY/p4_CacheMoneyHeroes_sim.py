@@ -224,9 +224,9 @@ def main():
             cache_DM = Blocks(block, way, sets)
         elif (cacheChoice == 2 and choice):
             block = int(input("block size:"))
-            while (way != 2):
+            while (way != 2 and way != 3):
                 way = int(input("way:"))
-                if (way != 2):
+                if (way != 2 and way != 3):
                     print("2-way Set-associative can only have 2 way. ONLY ENTER 2 for WAY")
             sets = int(input("set:"))
             cache_SA = Blocks(block, way, sets)
@@ -263,8 +263,8 @@ def main():
     if(cacheChoice == 2):
         print("For cache SA:")
         print("    Hit rate: %.2f" % (cache_SA.hit_num / cache_SA.read_num))
-    
-    
+
+
     if (diagnose == 1 or choice == 0):
         print("------------------ Multi-cycle cpu ------------------")
         print("Total # of cycles = " + str(cycle))
