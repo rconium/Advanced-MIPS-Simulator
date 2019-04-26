@@ -177,7 +177,7 @@ class Blocks:
 def main():
     fileName = input("Please enter MIPS instruction file name: ")
     inst_file = "instr_list.txt"
-    print("Note: This program assumes that the instructions are in hex.")
+    print("Note: This program assumes that the instructions are in hex.\n")
     inputFile = open(fileName, "r")
     outputFile = open(inst_file, "w")
     global instructions
@@ -192,18 +192,18 @@ def main():
     way = -1
     sets = -1
 
-    choice = True if int(input("press 1 for diagnose mode else 0 for normal operation\n")) == 1 else False
+    choice = True if int(input("Press 1 for diagnose mode else 0 for normal operation: ")) == 1 else False
 
     if choice:
         while (diagnose < 1 or diagnose > 3):
-            diagnose = int(input("1)Multi-cycle\t\t2)Slow pipeline\t\t3)Fast pipeline\n"))
+            diagnose = int(input("1)Multi-cycle\t\t2)Slow pipeline\t\t3)Fast pipeline\n> "))
             if (diagnose < 1 or diagnose > 3):
-                print("enter values from 1-3 ONLY puta")
+                print("ERROR: Enter values from 1-3 ONLY")
 
     while (cacheChoice < 1 or cacheChoice > 3):
-        cacheChoice = int(input("\nChoose which cache to run with the CPU\n1)Direct-mapping\t\t2)2-way Set-associative\t\t3)Fully-associated\n"))
+        cacheChoice = int(input("\nChoose which cache to run with the CPU\n1)Direct-mapping\t\t2)2-way Set-associative\t\t3)Fully-associated\n> "))
         if (cacheChoice < 1 or cacheChoice > 3):
-            print("enter values from 1-3 ONLY puta")
+            print("ERROR: Enter values from 1-3")
 
         # DM (b=8, N=1, S=8)
         #cache_DM = Blocks(8, 1, 8)
@@ -262,14 +262,14 @@ def main():
         print("# of 4 cycles = " + str(fourcycle))
         print("% of instructions are 3 cycles = " + str(fourcycle / pc) + " %")
         print("# of 5 cycles = " + str(fivecycle))
-        print("% of instructions are 3 cycles = " + str(fivecycle / pc) + " %")
+        print("% of instructions are 3 cycles = " + str(fivecycle / pc) + " %\n")
     if (diagnose == 2 or choice == 0):
         print("------------------ Slow pipeline cpu ------------------")
         print("Total # of cycles = " + str(pipeIntrs + NOP + 4 - 3))
         print("# instr entering pipeline: " + str(pipeIntrs))
         print("finishing up the last instruction: 4")
         print("control hazard delay = " + str(chSUM - 3))
-        print("data hazards dealy = " + str(dhSUM))
+        print("data hazards dealy = " + str(dhSUM) + "\n")
     if (diagnose == 3 or choice == 0):
         print("------------------ Fast pipeline cpu ------------------")
         print("Total # of cycles = " + str(pipeIntrs + stall + 4 - 1))
