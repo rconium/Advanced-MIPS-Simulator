@@ -47,7 +47,7 @@ class Blocks:
             self.data.append(tmp_set)
         
         self.block_bit: int = ceil(log(self.blk_num, 2))
-        self.word_bit: int = ceil(log(self.wd_num, 2)) + 2   # in block offset bits
+        self.word_bit: int = ceil(log(self.wd_num, 2))   # in block offset bits
         self.read_num = 0
         self.hit_num = 0
 
@@ -156,18 +156,22 @@ class Blocks:
                 print(output)
 
                 # content
+                output = ''
                 for j in range(self.wd_num):
-                    print("j = " + str(j))
-                    print("range of j = " + str(range(self.wd_num)))
                     tmp_string = ''
                     for k in range(self.way_num):
-                        print("k = " + str(k))
-                        print("range of k = " + str(range(self.way_num)))
                         ele = self[i][k].data
-                        if ele < 0:
-                            ele = 2**32 + ele
-                        output += "                  0x" + format(ele, '08x')
-                    print(output)
+                        
+                        d = 0
+                        for indx in ele:
+                            if indx < 0:
+                                indx = 2**32 + ele
+                            output += "                  0x" + format(indx, '08x')
+                            d += 1
+                            if (d == ceil(log(self.blk_num, 2))):
+                                output += "\n"
+                                d = 0
+                        print(output)
 
                 
 def main():
@@ -473,7 +477,7 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
                 print("------------------------- cache -------------------------")
                 print("target" + hex(mems_location[mems_index]))
                 # DM Cache
-                print("DM cache, block size of 2 words, 8 blocksz")
+                print("DM cache")
                 block_index = cache_DM.get_blk_index(mems_index)
                 target_block = cache_DM.get_the_block_need_to_write(mems_index)
                 print("   blk/set to access :", block_index)
@@ -490,7 +494,7 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
             elif (cacheChoice == 3):
                 # FA Cache
                 print()
-                print("FA cache, block size of 4 words, 4 blocks")
+                print("FA cache")
                 block_index = cache_FA.get_blk_index(mems_index)
                 target_block = cache_FA.get_the_block_need_to_write(mems_index)
                 print("   blk/set to access :", block_index)
@@ -507,7 +511,7 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
             else:
                 # 2 way set-associative cache
                 print()
-                print("2 way SA cache, block size of 8 bytes, 4 sets")
+                print("2 way SA cache")
                 block_index = cache_SA.get_blk_index(mems_index)
                 target_block = cache_SA.get_the_block_need_to_write(mems_index)
                 print("   blk/set to access :", block_index)
