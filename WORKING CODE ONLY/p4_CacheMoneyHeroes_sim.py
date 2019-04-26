@@ -257,10 +257,10 @@ def main():
     if(cacheChoice == 1):
         print("For cache DM:")
         print("    Hit rate: %.2f" % (cache_DM.hit_num / cache_DM.read_num))
-    if(cacheChoice == 2):
+    if(cacheChoice == 3):
         print("For cache FA:")
         print("    Hit rate: %.2f" % (cache_FA.hit_num / cache_FA.read_num))
-    if(cacheChoice == 3):
+    if(cacheChoice == 2):
         print("For cache SA:")
         print("    Hit rate: %.2f" % (cache_SA.hit_num / cache_SA.read_num))
     
