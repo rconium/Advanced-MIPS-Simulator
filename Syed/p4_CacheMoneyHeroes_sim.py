@@ -254,6 +254,17 @@ def main():
     inputFile.close()
     disassemble(instructions, diagnose, choice, cacheChoice)
 
+    if(cacheChoice == 1):
+        print("For cache DM:")
+        print("    Hit rate: %.2f" % (cache_DM.hit_num / cache_DM.read_num))
+    if(cacheChoice == 2):
+        print("For cache FA:")
+        print("    Hit rate: %.2f" % (cache_FA.hit_num / cache_FA.read_num))
+    if(cacheChoice == 3):
+        print("For cache SA:")
+        print("    Hit rate: %.2f" % (cache_SA.hit_num / cache_SA.read_num))
+    
+    
     if (diagnose == 1 or choice == 0):
         print("------------------ Multi-cycle cpu ------------------")
         print("Total # of cycles = " + str(cycle))
