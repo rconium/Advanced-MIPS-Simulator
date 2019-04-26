@@ -224,9 +224,9 @@ def main():
         cache_DM = Blocks(block, way, sets)
     elif (cacheChoice == 2):
         block = int(input("block size:"))
-        while (way != 2):
+        while (way != 2 and way!=3):
             way = int(input("way:"))
-            if (way != 2):
+            if (way != 2 and way!=3):
                 print("2-way Set-associative can only have 2 way. ONLY ENTER 2 for WAY puta")
         sets = int(input("set:"))
         cache_SA = Blocks(block, way, sets)
