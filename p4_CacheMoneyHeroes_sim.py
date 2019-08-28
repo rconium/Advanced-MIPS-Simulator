@@ -1,6 +1,6 @@
 regs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # Registers $0 ~ $23
-mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # memory 0x2000 to 0x2050
-mems_location = [0x2000, 0x2004, 0x2008, 0x200c, 0x2010, 0x2014, 0x2018, 0x201c, 0x2020, 0x2024, 0x2028, 0x202c, 0x2030, 0x2034, 0x2038, 0x203c, 0x2040, 0x2044, 0x2048, 0x204c, 0x2050]
+mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # memory 0x2000 to 0x2050
+mems_location = [0x2000, 0x2004, 0x2008, 0x200c, 0x2010, 0x2014, 0x2018, 0x201c, 0x2020, 0x2024, 0x2028, 0x202c, 0x2030, 0x2034, 0x2038, 0x203c, 0x2040, 0x2044, 0x2048, 0x204c, 0x2050, 0x2054, 0x2058, 0x205c, 0x2060, 0x2064]
 
 cycle = 0
 pipeIntrs = 0
@@ -45,7 +45,7 @@ class Blocks:
         for i in range(blk_num):
             tmp_set = [Block(wd_num) for j in range(way_num)]
             self.data.append(tmp_set)
-        
+
         self.block_bit: int = ceil(log(self.blk_num, 2))
         self.word_bit: int = ceil(log(self.wd_num, 2))   # in block offset bits
         self.read_num = 0
@@ -161,7 +161,7 @@ class Blocks:
                     tmp_string = ''
                     for k in range(self.way_num):
                         ele = self[i][k].data
-                        
+
                         d = 0
                         for indx in ele:
                             if indx < 0:
@@ -173,7 +173,7 @@ class Blocks:
                                 d = 0
                         print(output)
 
-                
+
 def main():
     fileName = input("Please enter MIPS instruction file name: ")
     inst_file = "instr_list.txt"
@@ -224,9 +224,9 @@ def main():
         cache_DM = Blocks(block, way, sets)
     elif (cacheChoice == 2):
         block = int(input("block size:"))
-        while (way != 2):
+        while (way != 2 and way!=3):
             way = int(input("way:"))
-            if (way != 2):
+            if (way != 2 and way!=3):
                 print("2-way Set-associative can only have 2 way. ONLY ENTER 2 for WAY puta")
         sets = int(input("set:"))
         cache_SA = Blocks(block, way, sets)
@@ -238,7 +238,7 @@ def main():
             if (sets != 1):
                 print("Fully-associated can only have 1 set. ONLY ENTER 1 for SETS puta")
         cache_FA = Blocks(block, way, sets)
-            
+
 
         #cache_user = Blocks(block, way, sets)
         #cache_DM = cache_SA = cache_FA = cache_user
@@ -254,6 +254,17 @@ def main():
     inputFile.close()
     disassemble(instructions, diagnose, choice, cacheChoice)
 
+    if(cacheChoice == 1):
+        print("For cache DM:")
+        print("    Hit rate: %.2f" % (cache_DM.hit_num / cache_DM.read_num))
+    if(cacheChoice == 2):
+        print("For cache FA:")
+        print("    Hit rate: %.2f" % (cache_FA.hit_num / cache_FA.read_num))
+    if(cacheChoice == 3):
+        print("For cache SA:")
+        print("    Hit rate: %.2f" % (cache_SA.hit_num / cache_SA.read_num))
+    
+    
     if (diagnose == 1 or choice == 0):
         print("------------------ Multi-cycle cpu ------------------")
         print("Total # of cycles = " + str(cycle))

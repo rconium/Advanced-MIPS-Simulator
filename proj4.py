@@ -135,7 +135,7 @@ def disassemble(instructions, diagnose, choice):
         instr = instructions[n]
 
         pc = pc + 1
-        currentPC = pc 
+        currentPC = pc
         # print(regs[12])
         counter = counter + 1
         s = int(instr[6:11], 2)
@@ -184,23 +184,23 @@ def disassemble(instructions, diagnose, choice):
                     print("pipeline stage: " + str(getCycle(currentPC)))
             if (diagnose == 3 or choice == 0):
                 if (n+1 <= len(instructions) - 1):
-                    if ((getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t) and 
+                    if ((getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t) and
                     (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Stall")
+                        print("next instr: " + getInstr(getOP(instructions[n + 1])))
+                        print("curr t: " + str(t))
+                        print("next s: " + str(getRS(instructions[n + 1])))
+                        print("next t: " + str(getRT(instructions[n + 1])))
+                        print("Data hazard")
+                        print("Stall")
                         stall += 1
                         dhStall += 1
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (choice != 0):
-                print("ori $" + str(t) + ", $" + str(s) + ", 0d" + str(imm))
-                print("pc = " + str(pc*4) + "\n")
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("ori $" + str(t) + ", $" + str(s) + ", 0d" + str(imm))
+            print("pc = " + str(pc*4) + "\n")
             cycle += 4
             pipeIntrs += 1
             fourcycle += 1
@@ -216,58 +216,49 @@ def disassemble(instructions, diagnose, choice):
             mems_index = mems_index + imm // 4
             regs[t] = mems[mems_index]
             outputFile.write("r" + str(t) + " = " + str(regs[t]) + "\n")
-            if (diagnose == 1): 
+            if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 5 cycles")
-            if (diagnose == 2 or choice == 0): 
+            if (diagnose == 2 or choice == 0):
                 if (n+1 <= len(instructions) - 1):
                     if (getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Number of NOPs: 2")
+                        print("Data hazard")
+                        print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
                         skip = True
                 if (n+2 <= len(instructions) - 1 and not skip):
                     if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Stall")
+                        print("Data hazard")
+                        print("Stall")
                         NOP += 1
                         dhSUM += 1
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
+                    print("pipeline stage: " + str(getCycle(currentPC)))
             if (diagnose == 3 or choice == 0):
                 if (n+1 <= len(instructions) - 1):
                     if (getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Stall")
+                        print("Data hazard")
+                        print("Stall")
                         stall += 1
                         dhStall += 1
-                    elif ((getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t) and 
+                    elif ((getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t) and
                     (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Stall")
+                        print("Data hazard")
+                        print("Stall")
                         stall += 2
                         dhStall += 2
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (choice != 0):
-                print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
-                print("pc = " + str(pc*4) + "\n")
-            cycle += 5 
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
+            print("pc = " + str(pc*4) + "\n")
+            cycle += 5
             pipeIntrs += 1
             fivecycle += 1
 
@@ -280,49 +271,41 @@ def disassemble(instructions, diagnose, choice):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
-            if (diagnose == 2 or choice == 0): 
+            if (diagnose == 2 or choice == 0):
                 if (n+1 <= len(instructions) - 1):
                     if (getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Number of NOPs: 2")
+                        print("Data hazard")
+                        print("Number of NOPs: 2")
                         NOP += 2
                         dhSUM += 2
                         skip = True
                 if (n+2 <= len(instructions) - 1 and not skip):
                     if (getRS(instructions[n + 2]) == t or getRT(instructions[n + 2]) == t):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Number of NOPs: 1")
+                        print("Data hazard")
+                        print("Number of NOPs: 1")
                         NOP += 1
                         dhSUM += 1
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
+                    print("pipeline stage: " + str(getCycle(currentPC)))
             if (diagnose == 3 or choice == 0):
                 if (n+1 <= len(instructions) - 1):
-                    if ((getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t) and 
+                    if ((getRS(instructions[n + 1]) == t or getRT(instructions[n + 1]) == t) and
                     (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                        if (choice != 0):
-                            print("Data hazard")
-                            print("Stall")
+                        print("Data hazard")
+                        print("Stall")
                         stall += 1
                         dhStall += 1
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (choice != 0):
-                print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
-                print("pc = " + str(pc*4) + "\n")
-            cycle += 4 
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("addi $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4) + "\n")
+            cycle += 4
             pipeIntrs += 1
             fourcycle += 1
 
@@ -340,30 +323,23 @@ def disassemble(instructions, diagnose, choice):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 4 cycles")
-            if (diagnose == 2 or choice == 0): 
-                if (choice != 0):
-                    print("No hazard")
+            if (diagnose == 2 or choice == 0):
+                print("No hazard")
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (diagnose == 3 or choice == 0): 
-                if (choice != 0):
-                    print("No hazard")
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            if (diagnose == 3 or choice == 0):
+                print("No hazard")
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (choice != 0):
-                print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
-                print("pc = " + str(pc*4) + "\n")
-            cycle += 4 
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("sw $" + str(t) + ", " + str(imm) + "($" + str(s) + ")")
+            print("pc = " + str(pc*4) + "\n")
+            cycle += 4
             pipeIntrs += 1
             fourcycle += 1
 
@@ -383,40 +359,31 @@ def disassemble(instructions, diagnose, choice):
                 print("cycle: " + str(cycle))
                 print("Running 3 cycles")
             if (diagnose == 2 or choice == 0):
-                if (choice != 0): 
-                    print("Control hazard")
-                    print("Number of NOPs: 3")
+                print("Control hazard")
+                print("Number of NOPs: 3")
                 NOP += 3
                 chSUM += 3
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
+                    print("pipeline stage: " + str(getCycle(currentPC)))
             if (diagnose == 3 or choice == 0):
-                if (choice != 0):
-                    print("Control hazard")
+                print("Control hazard")
                 if (regs[t] == regs[s]):
-                    if (choice != 0):
-                        print("Stall")
+                    print("Stall")
                     stall += 1
                     chStall += 1
                 else:
-                    if (choice != 0):
-                        print("Flush")
+                    print("Flush")
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (choice != 0):
-                print("beq $" + str(t) + ", $" + str(s) + ", " + str(imm))
-                print("pc = " + str(pc*4) + "\n")
-            cycle += 3 
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("beq $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4) + "\n")
+            cycle += 3
             pipeIntrs += 1
             threecycle += 1
 
@@ -431,41 +398,32 @@ def disassemble(instructions, diagnose, choice):
             if (diagnose == 1):
                 print("cycle: " + str(cycle))
                 print("Running 3 cycles")
-            if (diagnose == 2 or choice == 0): 
-                if (choice != 0):
-                    print("Control hazard")
-                    print("Number of NOPs: 3")
+            if (diagnose == 2 or choice == 0):
+                print("Control hazard")
+                print("Number of NOPs: 3")
                 NOP += 3
-                chSUM += 3 
+                chSUM += 3
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
+                    print("pipeline stage: " + str(getCycle(currentPC)))
             if (diagnose == 3 or choice == 0):
-                if (choice != 0):
-                    print("Control hazard")
+                print("Control hazard")
                 if (regs[t] != regs[s]):
-                    if (choice != 0):
-                        print("Stall")
+                    print("Stall")
                     stall += 1
                     chStall += 1
                 else:
-                    if (choice != 0):
-                        print("Flush")
+                    print("Flush")
                 if (currentPC == 0):
-                    if (choice != 0):
-                        print("pipeline stage: F")
+                    print("pipeline stage: F")
                 else:
                     currentPC = currentPC % 5
-                    if (choice != 0):
-                        print("pipeline stage: " + str(getCycle(currentPC)))
-            if (choice != 0):
-                print("bne $" + str(t) + ", $" + str(s) + ", " + str(imm))
-                print("pc = " + str(pc*4) + "\n")
-            cycle += 3 
+                    print("pipeline stage: " + str(getCycle(currentPC)))
+            print("bne $" + str(t) + ", $" + str(s) + ", " + str(imm))
+            print("pc = " + str(pc*4) + "\n")
+            cycle += 3
             pipeIntrs += 1
             threecycle += 1
 
@@ -484,49 +442,41 @@ def disassemble(instructions, diagnose, choice):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    print("add $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("add $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
 
@@ -537,52 +487,43 @@ def disassemble(instructions, diagnose, choice):
                 regs[d] = regs[s] - regs[t]
                 outputFile.write("r" + str(d) + " = " + str(regs[d]) + "\n")
                 if (diagnose == 1):
-                    if (choice != 0):
-                        print("cycle: " + str(cycle))
-                        print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                    print("cycle: " + str(cycle))
+                    print("Running 4 cycles")
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    print("sub $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("sub $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
 
@@ -598,49 +539,41 @@ def disassemble(instructions, diagnose, choice):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    print("slt $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("slt $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
 
@@ -659,49 +592,41 @@ def disassemble(instructions, diagnose, choice):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    print("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("sltu $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
 
@@ -714,49 +639,41 @@ def disassemble(instructions, diagnose, choice):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    print("addu $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("addu $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
 
@@ -769,50 +686,41 @@ def disassemble(instructions, diagnose, choice):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    if (choice != 0):
-                        print("sll $" + str(d) + ", $" + str(t) + ", " + str(sh))
-                        print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("sll $" + str(d) + ", $" + str(t) + ", " + str(sh))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
 
@@ -825,53 +733,45 @@ def disassemble(instructions, diagnose, choice):
                 if (diagnose == 1):
                     print("cycle: " + str(cycle))
                     print("Running 4 cycles")
-                if (diagnose == 2 or choice == 0): 
+                if (diagnose == 2 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
                         if (getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 2")
+                            print("Data hazard")
+                            print("Number of NOPs: 2")
                             NOP += 2
                             dhSUM += 2
                             skip = True
                     if (n+2 <= len(instructions) - 1 and not skip):
                         if (getRS(instructions[n + 2]) == d or getRT(instructions[n + 2]) == d):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Number of NOPs: 1")
+                            print("Data hazard")
+                            print("Number of NOPs: 1")
                             NOP += 1
                             dhSUM += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
+                        print("pipeline stage: " + str(getCycle(currentPC)))
                 if (diagnose == 3 or choice == 0):
                     if (n+1 <= len(instructions) - 1):
-                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and 
+                        if ((getRS(instructions[n + 1]) == d or getRT(instructions[n + 1]) == d) and
                         (getInstr(getOP(instructions[n + 1])) == "beq" or getInstr(getOP(instructions[n + 1])) == "bne")):
-                            if (choice != 0):
-                                print("Data hazard")
-                                print("Stall")
+                            print("Data hazard")
+                            print("Stall")
                             stall += 1
                             dhStall += 1
                     if (currentPC == 0):
-                        if (choice != 0):
-                            print("pipeline stage: F")
+                        print("pipeline stage: F")
                     else:
                         currentPC = currentPC % 5
-                        if (choice != 0):
-                            print("pipeline stage: " + str(getCycle(currentPC)))
-                if (choice != 0):
-                    print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
-                    print("pc = " + str(pc * 4) + "\n")
-                cycle += 4 
+                        print("pipeline stage: " + str(getCycle(currentPC)))
+                print("xor $" + str(d) + ", $" + str(s) + ", $" + str(t))
+                print("pc = " + str(pc * 4) + "\n")
+                cycle += 4
                 pipeIntrs += 1
                 fourcycle += 1
         n = n + 1
-        
+
 
 
 # It's not really necessary to understand how it works for this class, but it allows us to use this code as a module or a standalone program.

@@ -1,1 +1,0 @@
-print("Number of NOPs: 2")
