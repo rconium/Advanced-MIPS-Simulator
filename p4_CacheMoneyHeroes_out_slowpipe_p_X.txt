@@ -1,0 +1,1535 @@
+Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+>>> 
+ RESTART: C:\Users\Duy\AppData\Local\Programs\Python\Python37-32\proj4test.py 
+Please enter MIPS instruction file name: Testx.txt
+Note: This program assumes that the instructions are in hex.
+
+Press 1 for diagnose mode else 0 for normal operation: 1
+1)Multi-cycle		2)Slow pipeline		3)Fast pipeline
+> 2
+
+Choose which cache to run with the CPU
+1)Direct-mapping		2)2-way Set-associative		3)Fully-associated
+> 1
+Enter Cache Configuration:
+block size:8
+way:1
+set:8
+Data hazard
+Number of NOPs: 1
+pipeline stage: F
+ori $8, $0, 0d24
+pc = 0
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $0, 64
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 16
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: F
+sll $10, $8, 24
+pc = 20
+
+pipeline stage: D
+addu $10, $10, $8
+pc = 24
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+sub $8, $0, $8
+pc = 28
+
+pipeline stage: M
+xor $8, $10, $8
+pc = 32
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -8
+pc = 4
+
+No hazard
+pipeline stage: E
+sw $8, 8192($9)
+pc = 8
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+addi $9, $9, -4
+pc = 12
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $9, 5
+pc = 36
+
+pipeline stage: F
+addi $10, $0, 64
+pc = 40
+
+pipeline stage: D
+addu $12, $0, $0
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2000
+DM cache
+   blk/set to access : 0
+   valid bit         : 0
+   tag               : None
+   hit or not        : False
+   cache update data :
+        block 0 :
+                  valid: 1
+                  tag  : 0
+        block 1 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 2 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 3 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 4 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 5 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 6 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 7 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2004
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2008
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x200c
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2010
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2014
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2018
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x201c
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2020
+DM cache
+   blk/set to access : 1
+   valid bit         : 0
+   tag               : None
+   hit or not        : False
+   cache update data :
+        block 0 :
+                  valid: 1
+                  tag  : 0
+        block 1 :
+                  valid: 1
+                  tag  : 0
+        block 2 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 3 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 4 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 5 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 6 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 7 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2024
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2028
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x202c
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2030
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2034
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x2038
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 56
+
+pipeline stage: F
+addi $12, $12, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 44
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: E
+lw $8,8192($9)
+pc = 48
+
+------------------------- cache -------------------------
+target0x203c
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+Data hazard
+Number of NOPs: 2
+pipeline stage: M
+slt $11, $8, $0
+pc = 52
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+bne $0, $11, 1
+pc = 60
+
+Data hazard
+Number of NOPs: 2
+pipeline stage: D
+addi $9, $9, 4
+pc = 64
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: E
+bne $10, $9, -6
+pc = 68
+
+No hazard
+pipeline stage: M
+sw $12, 8192($0)
+pc = 72
+
+Control hazard
+Number of NOPs: 3
+pipeline stage: W
+beq $0, $0, -1
+pc = 76
+
+------------------ Slow pipeline cpu ------------------
+Total # of cycles = 607
+# instr entering pipeline: 223
+finishing up the last instruction: 4
+control hazard delay = 189
+data hazards dealy = 191
+
+>>> 
