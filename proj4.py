@@ -1,6 +1,6 @@
 regs = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # Registers $0 ~ $23
-mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # memory 0x2000 to 0x2050
-mems_location = [0x2000, 0x2004, 0x2008, 0x200c, 0x2010, 0x2014, 0x2018, 0x201c, 0x2020, 0x2024, 0x2028, 0x202c, 0x2030, 0x2034, 0x2038, 0x203c, 0x2040, 0x2044, 0x2048, 0x204c, 0x2050, 0x2054, 0x2058, 0x205c, 0x2060, 0x2064]
+mems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # memory 0x2000 to 0x2050
+mems_location = [0x2000, 0x2004, 0x2008, 0x200c, 0x2010, 0x2014, 0x2018, 0x201c, 0x2020, 0x2024, 0x2028, 0x202c, 0x2030, 0x2034, 0x2038, 0x203c, 0x2040, 0x2044, 0x2048, 0x204c, 0x2050]
 
 cycle = 0
 pipeIntrs = 0
@@ -47,7 +47,7 @@ class Blocks:
             self.data.append(tmp_set)
 
         self.block_bit: int = ceil(log(self.blk_num, 2))
-        self.word_bit: int = ceil(log(self.wd_num, 2))   # in block offset bits
+        self.word_bit: int = ceil(log(self.wd_num, 2)) + 2   # in block offset bits
         self.read_num = 0
         self.hit_num = 0
 
@@ -156,28 +156,21 @@ class Blocks:
                 print(output)
 
                 # content
-                output = ''
                 for j in range(self.wd_num):
                     tmp_string = ''
                     for k in range(self.way_num):
-                        ele = self[i][k].data
 
-                        d = 0
-                        for indx in ele:
-                            if indx < 0:
-                                indx = 2**32 + ele
-                            output += "                  0x" + format(indx, '08x')
-                            d += 1
-                            if (d == ceil(log(self.blk_num, 2))):
-                                output += "\n"
-                                d = 0
-                        print(output)
+                        ele = self[i][k].data[j]
+                        if ele < 0:
+                            ele = 2**32 + ele
+                        output += "                  0x" + format(ele, '08x')
+                    print(output)
 
-
+                
 def main():
     fileName = input("Please enter MIPS instruction file name: ")
     inst_file = "instr_list.txt"
-    print("Note: This program assumes that the instructions are in hex.\n")
+    print("Note: This program assumes that the instructions are in hex.")
     inputFile = open(fileName, "r")
     outputFile = open(inst_file, "w")
     global instructions
@@ -185,25 +178,18 @@ def main():
     global cache_DM
     global cache_FA
     global cache_SA
+    global cache_user
     instructions = []  # Declares instructions to be an array
     num_of_instr = 0
     diagnose = 0
-    cacheChoice = -1
-    way = -1
-    sets = -1
 
-    choice = True if int(input("Press 1 for diagnose mode else 0 for normal operation: ")) == 1 else False
+    choice = True if int(input("press 1 for diagnose mode else 0 for normal operation\n")) == 1 else False
 
-    if (choice == True):
+    if choice:
         while (diagnose < 1 or diagnose > 3):
-            diagnose = int(input("1)Multi-cycle\t\t2)Slow pipeline\t\t3)Fast pipeline\n> "))
+            diagnose = int(input("1)multi-cycle\t\t2)slow pipeline\t\t3)fast pipeline\n"))
             if (diagnose < 1 or diagnose > 3):
-                print("ERROR: Enter values from 1-3 ONLY")
-
-    while((cacheChoice < 1 or cacheChoice > 3) and choice == True):
-        cacheChoice = int(input("\nChoose which cache to run with the CPU\n1)Direct-mapping\t\t2)2-way Set-associative\t\t3)Fully-associated\n> "))
-        if (cacheChoice < 1 or cacheChoice > 3):
-            print("ERROR: Enter values from 1-3")
+                print("enter values from 1-3 ONLY puta")
 
         # DM (b=8, N=1, S=8)
         #cache_DM = Blocks(8, 1, 8)
@@ -212,36 +198,12 @@ def main():
         # 2way-SA, total 8 blocks, 2 words each block
         #cache_SA = Blocks(8, 2, 4)
         # User Customized cache configuration
-    if choice:
-        print("Enter Cache Configuration:")
-        if (cacheChoice == 1 and choice):
-            block = int(input("block size:"))
-            while (way != 1):
-                way = int(input("way:"))
-                if (way != 1):
-                    print("Direct-mapping can only have 1 way. ONLY ENTER 1 for WAY")
-            sets = int(input("set:"))
-            cache_DM = Blocks(block, way, sets)
-        elif (cacheChoice == 2 and choice):
-            block = int(input("block size:"))
-            while (way != 2 and way != 3):
-                way = int(input("way:"))
-                if (way != 2 and way != 3):
-                    print("2-way Set-associative can only have 2 way. ONLY ENTER 2 for WAY")
-            sets = int(input("set:"))
-            cache_SA = Blocks(block, way, sets)
-        elif choice:
-            block = int(input("block size:"))
-            way = int(input("way:"))
-            while (sets != 1):
-                sets = int(input("set:"))
-                if (sets != 1):
-                    print("Fully-associated can only have 1 set. ONLY ENTER 1 for SETS")
-            cache_FA = Blocks(block, way, sets)
-
-
-        #cache_user = Blocks(block, way, sets)
-        #cache_DM = cache_SA = cache_FA = cache_user
+        print("Select Cache Configuration:")
+        block = int(input("block size:"))
+        way = int(input("way:"))
+        sets = int(input("set:"))
+        cache_user = Blocks(block, way, sets)
+        cache_DM = cache_SA = cache_FA = cache_user
 
     for line in inputFile:
         if (line == "\n" or line[0] == '#'):  # empty lines and comments ignored
@@ -252,18 +214,7 @@ def main():
         num_of_instr = num_of_instr + 1
         instructions.append(line)
     inputFile.close()
-    disassemble(instructions, diagnose, choice, cacheChoice)
-
-    if(cacheChoice == 1):
-        print("For cache DM:")
-        print("    Hit rate: %.2f" % (cache_DM.hit_num / cache_DM.read_num))
-    if(cacheChoice == 3):
-        print("For cache FA:")
-        print("    Hit rate: %.2f" % (cache_FA.hit_num / cache_FA.read_num))
-    if(cacheChoice == 2):
-        print("For cache SA:")
-        print("    Hit rate: %.2f" % (cache_SA.hit_num / cache_SA.read_num))
-
+    disassemble(instructions, diagnose, choice)
 
     if (diagnose == 1 or choice == 0):
         print("------------------ Multi-cycle cpu ------------------")
@@ -273,14 +224,14 @@ def main():
         print("# of 4 cycles = " + str(fourcycle))
         print("% of instructions are 3 cycles = " + str(fourcycle / pc) + " %")
         print("# of 5 cycles = " + str(fivecycle))
-        print("% of instructions are 3 cycles = " + str(fivecycle / pc) + " %\n")
+        print("% of instructions are 3 cycles = " + str(fivecycle / pc) + " %")
     if (diagnose == 2 or choice == 0):
         print("------------------ Slow pipeline cpu ------------------")
         print("Total # of cycles = " + str(pipeIntrs + NOP + 4 - 3))
         print("# instr entering pipeline: " + str(pipeIntrs))
         print("finishing up the last instruction: 4")
         print("control hazard delay = " + str(chSUM - 3))
-        print("data hazards dealy = " + str(dhSUM) + "\n")
+        print("data hazards dealy = " + str(dhSUM))
     if (diagnose == 3 or choice == 0):
         print("------------------ Fast pipeline cpu ------------------")
         print("Total # of cycles = " + str(pipeIntrs + stall + 4 - 1))
@@ -322,7 +273,7 @@ def getInstr(argument):
     return switcher.get(str(argument), "nothing")
 
 
-def disassemble(instructions, diagnose, choice, cacheChoice):
+def disassemble(instructions, diagnose, choice):
     global n
     global NOP
     global stall
@@ -484,11 +435,11 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
             if (choice != 0):
                 print("lw $" + str(t) + "," + str(imm) + "($" + str(s) + ")")
                 print("pc = " + str(pc * 4) + "\n")
-            if (cacheChoice == 1 and choice != 0):
+            if (diagnose != 0):
                 print("------------------------- cache -------------------------")
                 print("target" + hex(mems_location[mems_index]))
                 # DM Cache
-                print("DM cache")
+                print("DM cache, block size of 2 words, 8 blocksz")
                 block_index = cache_DM.get_blk_index(mems_index)
                 target_block = cache_DM.get_the_block_need_to_write(mems_index)
                 print("   blk/set to access :", block_index)
@@ -502,10 +453,10 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
                 else:
                     print("   cache update data :")
                     cache_DM.show()
-            elif (cacheChoice == 3 and choice != 0):
+
                 # FA Cache
                 print()
-                print("FA cache")
+                print("FA cache, block size of 4 words, 4 blocks")
                 block_index = cache_FA.get_blk_index(mems_index)
                 target_block = cache_FA.get_the_block_need_to_write(mems_index)
                 print("   blk/set to access :", block_index)
@@ -519,10 +470,10 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
                 else:
                     print("   cache update data :")
                     cache_FA.show()
-            elif (cacheChoice == 2 and choice != 0):
+
                 # 2 way set-associative cache
                 print()
-                print("2 way SA cache")
+                print("2 way SA cache, block size of 8 bytes, 4 sets")
                 block_index = cache_SA.get_blk_index(mems_index)
                 target_block = cache_SA.get_the_block_need_to_write(mems_index)
                 print("   blk/set to access :", block_index)
@@ -537,20 +488,20 @@ def disassemble(instructions, diagnose, choice, cacheChoice):
                     print("   cache update data :")
                     cache_SA.show()
                 print()
-                #print("E. Customized cache configuration ")
-                #block_index = cache_user.get_blk_index(mems_index)
-                #target_block = cache_user.get_the_block_need_to_write(mems_index)
-                #print("   blk/set to access :", block_index)
-                #print("   valid bit         :", target_block.valid)
-                #print("   tag               :", target_block.tag)
-                #hit = cache_user.read(mems_index)
-                #print("   hit or not        :", hit)
-                #if hit:
-                #    print("   cache update data : no update ")
+                print("E. Customized cache configuration ")
+                block_index = cache_user.get_blk_index(mems_index)
+                target_block = cache_user.get_the_block_need_to_write(mems_index)
+                print("   blk/set to access :", block_index)
+                print("   valid bit         :", target_block.valid)
+                print("   tag               :", target_block.tag)
+                hit = cache_user.read(mems_index)
+                print("   hit or not        :", hit)
+                if hit:
+                    print("   cache update data : no update ")
 
-                #else:
-                #    print("   cache update data :")
-                #    cache_user.show()
+                else:
+                    print("   cache update data :")
+                    cache_user.show()
 
                 print("------------------- end --------------------\n")
             cycle += 5
