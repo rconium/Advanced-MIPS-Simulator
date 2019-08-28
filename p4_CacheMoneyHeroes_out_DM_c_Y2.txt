@@ -1,0 +1,2373 @@
+Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+>>> 
+ RESTART: C:\Users\Duy\AppData\Local\Programs\Python\Python37-32\proj4test.py 
+Please enter MIPS instruction file name: testy2.txt
+Note: This program assumes that the instructions are in hex.
+
+Press 1 for diagnose mode else 0 for normal operation: 1
+1)Multi-cycle		2)Slow pipeline		3)Fast pipeline
+> 1
+
+Choose which cache to run with the CPU
+1)Direct-mapping		2)2-way Set-associative		3)Fully-associated
+> 1
+Enter Cache Configuration:
+block size:8
+way:1
+set:8
+cycle: 0
+Running 4 cycles
+ori $8, $0, 0d2
+pc = 0
+
+cycle: 4
+Running 4 cycles
+addi $9, $0, 96
+pc = 4
+
+cycle: 8
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 12
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 16
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 19
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 23
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 27
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 31
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 34
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 38
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 42
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 45
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 49
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 53
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 57
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 60
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 64
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 68
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 71
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 75
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 79
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 83
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 86
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 90
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 94
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 97
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 101
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 105
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 109
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 112
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 116
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 120
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 123
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 127
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 131
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 135
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 138
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 142
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 146
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 149
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 153
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 157
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 161
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 164
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 168
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 172
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 175
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 179
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 183
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 187
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 190
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 194
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 198
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 201
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 205
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 209
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 213
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 216
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 220
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 224
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 227
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 231
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 235
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 239
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 242
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 246
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 250
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 253
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 257
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 261
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 265
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 268
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 272
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 276
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 279
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 283
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 287
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 291
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 294
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 298
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 302
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 305
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 309
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 313
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 317
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 320
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 324
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 328
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 331
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 335
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 339
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 343
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 346
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 350
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 354
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 357
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 361
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 365
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 369
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 372
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 376
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 380
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 383
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 387
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 391
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 395
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 398
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 402
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 406
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 409
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 413
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 417
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 421
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 424
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 428
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 432
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 435
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 439
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 443
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 447
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 450
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 454
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 458
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 461
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 465
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 469
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 473
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 476
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 480
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 484
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 487
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 491
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 495
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 499
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 502
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 506
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 510
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 513
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 517
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 521
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 525
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 528
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 532
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 536
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 539
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 543
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 547
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 551
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 554
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 558
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 562
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 565
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 569
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 573
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 577
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 580
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 584
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 588
+Running 3 cycles
+beq $0, $9, 4
+pc = 16
+
+cycle: 591
+Running 4 cycles
+addu $8, $8, $8
+pc = 20
+
+cycle: 595
+Running 4 cycles
+sub $8, $0, $8
+pc = 24
+
+cycle: 599
+Running 4 cycles
+addi $8, $8, -3
+pc = 28
+
+cycle: 603
+Running 3 cycles
+beq $0, $0, -7
+pc = 4
+
+cycle: 606
+Running 4 cycles
+sw $8, 8192($9)
+pc = 8
+
+cycle: 610
+Running 4 cycles
+addi $9, $9, -4
+pc = 12
+
+cycle: 614
+Running 3 cycles
+beq $0, $9, 4
+pc = 32
+
+cycle: 617
+Running 4 cycles
+addi $8, $0, 8312
+pc = 36
+
+cycle: 621
+Running 4 cycles
+addi $10, $0, 8288
+pc = 40
+
+cycle: 625
+Running 4 cycles
+addi $9, $0, 8192
+pc = 44
+
+cycle: 629
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 633
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x2000
+DM cache
+   blk/set to access : 0
+   valid bit         : 0
+   tag               : None
+   hit or not        : False
+   cache update data :
+        block 0 :
+                  valid: 1
+                  tag  : 0
+        block 1 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 2 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 3 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 4 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 5 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 6 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 7 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+cycle: 638
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 642
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2004
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 647
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 651
+Running 3 cycles
+beq $0, $13, 1
+pc = 68
+
+cycle: 654
+Running 4 cycles
+add $11, $0, $12
+pc = 72
+
+cycle: 658
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 662
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 665
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 669
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2008
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 674
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 678
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 681
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 685
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 688
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 692
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x200c
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 697
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 701
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 704
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 708
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 711
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 715
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 719
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 723
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 726
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 730
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x200c
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 735
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 739
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2010
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 744
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 748
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 751
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 755
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 758
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 762
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2014
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 767
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 771
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 774
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 778
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 781
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 785
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2018
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 790
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 794
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 797
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 801
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 804
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 808
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 812
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 816
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 819
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 823
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x2018
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 828
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 832
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x201c
+DM cache
+   blk/set to access : 0
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 837
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 841
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 844
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 848
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 851
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 855
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2020
+DM cache
+   blk/set to access : 1
+   valid bit         : 0
+   tag               : None
+   hit or not        : False
+   cache update data :
+        block 0 :
+                  valid: 1
+                  tag  : 0
+        block 1 :
+                  valid: 1
+                  tag  : 0
+        block 2 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 3 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 4 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 5 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 6 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 7 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+cycle: 860
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 864
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 867
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 871
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 874
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 878
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2024
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 883
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 887
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 890
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 894
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 897
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 901
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 905
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 909
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 912
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 916
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x2024
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 921
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 925
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2028
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 930
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 934
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 937
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 941
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 944
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 948
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x202c
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 953
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 957
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 960
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 964
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 967
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 971
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2030
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 976
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 980
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 983
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 987
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 990
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 994
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 998
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 1002
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 1005
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 1009
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x2030
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1014
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1018
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2034
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1023
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1027
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1030
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1034
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1037
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1041
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2038
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1046
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1050
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1053
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1057
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1060
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1064
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x203c
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1069
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1073
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1076
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1080
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 1083
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 1087
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 1091
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 1095
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 1098
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 1102
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x203c
+DM cache
+   blk/set to access : 1
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1107
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1111
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2040
+DM cache
+   blk/set to access : 2
+   valid bit         : 0
+   tag               : None
+   hit or not        : False
+   cache update data :
+        block 0 :
+                  valid: 1
+                  tag  : 0
+        block 1 :
+                  valid: 1
+                  tag  : 0
+        block 2 :
+                  valid: 1
+                  tag  : 0
+        block 3 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 4 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 5 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 6 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 7 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+cycle: 1116
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1120
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1123
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1127
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1130
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1134
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2044
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1139
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1143
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1146
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1150
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1153
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1157
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2048
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1162
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1166
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1169
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1173
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 1176
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 1180
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 1184
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 1188
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 1191
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 1195
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x2048
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1200
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1204
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x204c
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1209
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1213
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1216
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1220
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1223
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1227
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2050
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1232
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1236
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1239
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1243
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1246
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1250
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2054
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1255
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1259
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1262
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1266
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 1269
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 1273
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 1277
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 1281
+Running 3 cycles
+bne $0, $13, -13
+pc = 44
+
+cycle: 1284
+Running 4 cycles
+addi $14, $0, 3
+pc = 48
+
+cycle: 1288
+Running 5 cycles
+lw $11,0($9)
+pc = 52
+
+------------------------- cache -------------------------
+target0x2054
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1293
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1297
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2058
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1302
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1306
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1309
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1313
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1316
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1320
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x205c
+DM cache
+   blk/set to access : 2
+   valid bit         : 1
+   tag               : 0
+   hit or not        : True
+   cache update data : no update 
+cycle: 1325
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1329
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1332
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1336
+Running 3 cycles
+bne $0, $14, -7
+pc = 52
+
+cycle: 1339
+Running 4 cycles
+addi $9, $9, 4
+pc = 56
+
+cycle: 1343
+Running 5 cycles
+lw $12,0($9)
+pc = 60
+
+------------------------- cache -------------------------
+target0x2060
+DM cache
+   blk/set to access : 3
+   valid bit         : 0
+   tag               : None
+   hit or not        : False
+   cache update data :
+        block 0 :
+                  valid: 1
+                  tag  : 0
+        block 1 :
+                  valid: 1
+                  tag  : 0
+        block 2 :
+                  valid: 1
+                  tag  : 0
+        block 3 :
+                  valid: 1
+                  tag  : 0
+        block 4 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 5 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 6 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+        block 7 :
+                  valid: 0
+                  tag  : None
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+                  0x00000000
+cycle: 1348
+Running 4 cycles
+slt $13, $12, $11
+pc = 64
+
+cycle: 1352
+Running 3 cycles
+beq $0, $13, 1
+pc = 72
+
+cycle: 1355
+Running 4 cycles
+addi $14, $14, -1
+pc = 76
+
+cycle: 1359
+Running 3 cycles
+bne $0, $14, -7
+pc = 80
+
+cycle: 1362
+Running 4 cycles
+sw $11, 0($8)
+pc = 84
+
+cycle: 1366
+Running 4 cycles
+addi $8, $8, 4
+pc = 88
+
+cycle: 1370
+Running 4 cycles
+slt $13, $9, $10
+pc = 92
+
+cycle: 1374
+Running 3 cycles
+bne $0, $13, -13
+pc = 96
+
+cycle: 1377
+Running 3 cycles
+beq $0, $0, -1
+pc = 100
+
+For cache DM:
+    Hit rate: 0.88
+------------------ Multi-cycle cpu ------------------
+Total # of cycles = 1380
+# of 3 cycles = 104
+% of instructions are 3 cycles = 4.16 %
+# of 4 cycles = 227
+% of instructions are 3 cycles = 9.08 %
+# of 5 cycles = 32
+% of instructions are 3 cycles = 1.28 %
+
+>>> 

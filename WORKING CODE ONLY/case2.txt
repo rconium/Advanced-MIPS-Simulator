@@ -1,5 +1,0 @@
-# case 2: DIC = 6
-0x2008fffe
-0x21080001
-0x1408fffe
-0x1000ffff
